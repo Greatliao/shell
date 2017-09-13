@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+#These commands set up the Grid Environment for your job:
+#PBS -N mtlb0
+#PBS -o jobrun.out
+#PBS -e jobrun.err
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=50:00:00
+
+# PATH
+MAT=/home/soft/MATLAB/R2016b/bin/matlab
+ncpu=`cat $PBS_NODEFILE | wc -l`
+
+cd $PBS_O_WORKDIR
+
+# write start time
+echo Job started at `date`
+
+#nohup $MAT  -nodesktop -nosplash <a1_NM_gap_B_nc.m >matlab.out 2>matlab.err
+nohup $MAT  -nodesktop -nosplash <calc.m >matlab.out 2>matlab.err
+
+# write finish time
+echo Job finished at `date`
+
